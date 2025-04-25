@@ -1,38 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Smart Campus Assistant</title>
-    <style>
-        body { font-family: Arial, sans-serif; }
-        .chat-container { width: 400px; margin: auto; border: 1px solid #ccc; padding: 10px; }
-        .message { padding: 8px; margin: 5px; border-radius: 5px; }
-        .user-message { background-color: #f1f1f1; text-align: right; }
-        .ai-message { background-color: #d4e1f5; text-align: left; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>College Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="chat-container">
-        <div id="chatbox"></div>
-        <input type="text" id="userInput" placeholder="Ask me something...">
-        <button onclick="sendMessage()">Send</button>
+  <header>
+    <h1>College Dashboard</h1>
+    <nav>
+      <ul>
+        <li><a href="#student-dashboard">Student Dashboard</a></li>
+        <li><a href="#faculty-dashboard">Faculty Dashboard</a></li>
+        <li><a href="#admin-dashboard">Admin Dashboard</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Chat Assistant Section -->
+  <section id="chatbot">
+    <h2>Chat Assistant</h2>
+    <div id="chatbox">
+      <!-- Messages will appear here -->
     </div>
+    <input type="text" id="userInput" placeholder="Type your question...">
+    <button onclick="sendMessage()">Send</button>
+  </section>
 
-    <script>
-        async function sendMessage() {
-            let userText = document.getElementById("userInput").value;
-            let chatbox = document.getElementById("chatbox");
-            chatbox.innerHTML += `<div class='message user-message'>${userText}</div>`;
+  <main>
+    <!-- Student Dashboard Section -->
+    <section id="student-dashboard">
+      <h2>Student Dashboard</h2>
+      <div class="button-container">
+        <button onclick="navigateTo('admitCard')">Admit Card</button>
+        <button onclick="navigateTo('courses')">Courses</button>
+        <button onclick="navigateTo('examination')">Examination Seating Plan</button>
+        <button onclick="navigateTo('communication')">Central Communication</button>
+        <button onclick="navigateTo('circulars')">Circulars</button>
+        <button onclick="navigateTo('info')">College Info</button>
+        <button onclick="navigateTo('timetable')">Timetable</button>
+        <button onclick="navigateTo('fees')">Fee Undertaking</button>
+        <button onclick="navigateTo('mentor')">Mentor Mentee</button>
+        <button onclick="navigateTo('alumni')">Alumni Connect</button>
+      </div>
+    </section>
 
-            let response = await fetch('http://127.0.0.1:5000/chat', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({ message: userText })
-            });
+    <!-- Faculty Dashboard Section -->
+    <section id="faculty-dashboard">
+      <h2>Faculty Dashboard</h2>
+      <p>Features for faculty will appear here.</p>
+    </section>
 
-            let data = await response.json();
-            chatbox.innerHTML += `<div class='message ai-message'>${data.response}</div>`;
-        }
-    </script>
+    <!-- Admin Dashboard Section -->
+    <section id="admin-dashboard">
+      <h2>Admin Dashboard</h2>
+      <p>Features for admin will appear here.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 College Dashboard</p>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
