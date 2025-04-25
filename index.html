@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Smart Campus Assistant</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .chat-container { width: 400px; margin: auto; border: 1px solid #ccc; padding: 10px; }
+        .message { padding: 8px; margin: 5px; border-radius: 5px; }
+        .user-message { background-color: #f1f1f1; text-align: right; }
+        .ai-message { background-color: #d4e1f5; text-align: left; }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div id="chatbox"></div>
+        <input type="text" id="userInput" placeholder="Ask me something...">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+
+    <script>
+        async function sendMessage() {
+            let userText = document.getElementById("userInput").value;
+            let chatbox = document.getElementById("chatbox");
+            chatbox.innerHTML += `<div class='message user-message'>${userText}</div>`;
+
+            let response = await fetch('http://127.0.0.1:5000/chat', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ message: userText })
+            });
+
+            let data = await response.json();
+            chatbox.innerHTML += `<div class='message ai-message'>${data.response}</div>`;
+        }
+    </script>
+</body>
+</html>
